@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         /*El método enqueue permite realizar llamadas asincronas y recuperar su resultado
         en un Callback. */
         call.enqueue(new Callback<RecentPosts>() {
+            /* Si no se produce ningún fallo de conexión. */
             @Override
             public void onResponse(Call<RecentPosts> call, Response<RecentPosts> response) {
                 Log.e("MainActivity", "onResponse = " + response.toString());
@@ -33,12 +34,12 @@ public class MainActivity extends AppCompatActivity {
                 if (recentPosts != null) {
                     for (Post post : recentPosts.getPosts()) {
                         Log.e("MainActivity", "post title = " + post.getTitle());
-                        Log.e("MainActivity", "post content = " + post.getContent());
+                        //Log.e("MainActivity", "post content = " + post.getContent());
                         Log.e("MainActivity", "post author = " + post.getAuthor());
                     }
                 }
             }
-
+            /* Si se produce algún fallo de conexión. */
             @Override
             public void onFailure(Call<RecentPosts> call, Throwable t) {
                 Log.e("MainActivity", "onFailure = " + t.getMessage());
